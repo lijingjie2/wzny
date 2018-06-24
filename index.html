@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#box{
+				width: 1024px;
+				height: 768px;
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				top: 0;
+				margin: auto;
+			}
+			#box ul li{
+				width: 1024px;
+				height: 768px;
+				position: absolute;
+				list-style: none;
+				display: none;
+			}
+			.btn{
+				width: 30px;
+				height: 50px;
+				text-align: center;
+				line-height: 50px;
+				background: black;
+				color: white;
+				opacity: 0.4;
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				margin: auto;
+				cursor: pointer;
+			}
+			#right{
+				right: 0;
+			}
+			.circles{
+				width: 100%;
+				height: 20px;
+				
+				position: absolute;
+				bottom: 0;
+				
+			}
+			.circles span{
+				display: block;
+				width: 10px;
+				height: 10px;
+				background: wheat;
+				border-radius: 50%;
+				float: left;
+				margin-left: 10px;
+			}
+			.current{
+				background: indianred!important;
+			}
+			#nav{
+				background: url(img/triangles.png);
+				left: 0;
+				font:50px/3 "microsoft yahei";
+				
+			}
+			.bg{
+				top: 0;
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<ul>
+				<li style="display: block;"><img src="img/img1.jpg" alt="" /></li>
+				<li><img src="img/img2.jpg" alt="" /></li>
+				<li><img src="img/img3.jpg" alt="" /></li>
+				<li><img src="img/img4.jpg" alt="" /></li>
+				<li><img src="img/img5.jpg" alt="" /></li>
+			 
+			</ul>
+			<div class="btn" id="left"></div>
+			<div class="btn" id="right"></div>
+			<div class="circles">
+				<span class=current></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+		</div>
+		<div id="nav">
+    <ul>
+        
+        <li><a href="page1.html" />个人信息</a></li>
+        <li><a href="page2.html" />历史战绩</a></li>
+        <li><a href="page3.html" />综合数据</a></li>
+        <li><a href="page4.html" />能力雷达</a></li>
+        <li><a href="page5.html" />英雄攻略</a></li>
+      
+</ul>   
+</div>
+		<img src="img/triangles.png" class="bg"/>
+		<audio src="img/music.mp3" autoplay="autoplay" id="music"></audio>
+		   <script src="js/Jquery.js" type="text/javascript" charset="utf-8"></script>
+			    <script type="text/javascript">
+			    	var currIndex=0;
+			    	var nextIndex=1;
+			    	var timer;
+			    	timer= setInterval(move,2000)
+			    	$("#box").mouseover(function(){
+			    		clearInterval(timer)
+			    	})
+			    	$("#box").mouseleave(function(){
+			    		timer= setInterval(move,2000)
+			    	})
+			    function move(){
+			    	$("li").eq(currIndex).fadeOut(2000);
+			    	    $("li").eq(nextIndex).fadeIn(2000);
+			    	    $("span").eq(currIndex).removeClass("current")
+			    	    $("span").eq(nextIndex).addClass("current")
+			    	    currIndex=nextIndex;
+			    	    nextIndex++;
+			    	    if(nextIndex>4){
+			    	    	nextIndex=0;
+			    	    }
+			    }
+			    $("#right").click(function(){
+			    	move();
+			    })
+			    $("#left").click(function(){
+			    	nextIndex=currIndex-1;
+			    	if(nextIndex<0){
+			    		nextIndex=4
+			    	}
+			    	move();
+			    })
+			    $("span").mouseover(function(){
+			    	//console.log($(this).index())
+			    	nextIndex=$(this).index();
+			    	move();
+			    })
+			    </script>
+	</body>
+</html>
